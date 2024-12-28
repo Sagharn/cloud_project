@@ -194,8 +194,9 @@ img {
               hsl(39, 62%, 75%) 0%,
               hsl(39, 62%, 45%) 100%);
   color: transparent;
+  background-clip: text;
   -webkit-background-clip: text;
-  font-size: 1.5rem;            
+    font-size: 1.5rem;            
 }
 
 .nav__link:hover {
