@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+{% block content %}
+<!-- main -->
+<section class="page-section bg-dark text-dark p-5 shadow-lg">
+    <div class="container-fluid shadow col-xl-10 col-md-12">
+
+        <!-- Cards -->
+        <div class="row mx-auto g-3">
+            <h1 class="text-center">PRODUCTS ({{ total_products }})</h1>
+            {% for result in search_results.items %}
+            <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                <div class="card">
+                    <img src="{{ url_for('static', filename = 'img/products/' + result[0].image)}}" class="img-fluid">
+                    <div class="card-body">
+                        <h4 class="title"><a href="{{ url_for('product.show', id = result[0].product_id) }}">{{result[0].name}}</a></h4> 
+                        
+                        <h6 class="text">Price: ${{result[0].price}}</h6>
+                        <p class="text">{{result.category_name}}</p>
+
+                    </div>
+                    <div class="card-footer ">
+                        {% set url = url_for( "cart.add_to_cart", id=result[0].product_id) %}
+                            <form method="POST" action="{{ url }}">
+                                <div class="row text-center">
+                                
+                                    <input type="hidden" name="product_quantity" value=1>
+                                    
+                                    <button type="submit"
+                                    class="btn btn-primary btn-sm"
+                                    id="addToCart-1">
+                                    <i class="bi bi-cart-fill"></i> ADD TO CART
+                                    </button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <ul class="pagination">
+                {% if search_results.has_prev %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('main.search_products', page_num=search_results.prev_num) }}"><<</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link"><<</span> </li>
+                {% endif %}
+                   
+                  
+                {% for page in search_results.iter_pages(left_edge=2, right_edge=2) %}
+                
+                    {% if page %}
+                        {% if page != search_results.page %}
+                            <li class="page-item"><a class="page-link" href="{{ url_for('main.search_products', page_num=page) }}">{{ page }}</a></li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="{{ url_for('main.search_products', page_num=page) }}">{{ page }}</a></li>
+                        {% endif %}
+                    {% else %}
+                            <li class="page-item disabled"><a href="#" class="page-link">…</a></li> 
+                    {% endif %}
+
+                {% endfor %}
+                
+                {% if search_results.has_next %}
+                 <li class="page-item"><a class="page-link" href="{{ url_for('main.search_products', page_num=search_results.next_num) }}">>></a></li>
+                {% else %}
+                 <li class="page-item disabled"><span class="page-link">>></span></li>
+                {% endif %}
+            </ul>
+        </div>
+        
+            
+    </div>
+</section>
+<!-- main End -->
+
+{% endblock %}
