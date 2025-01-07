@@ -1,0 +1,114 @@
+<%- include("_header.ejs") %>
+	<div class="hero user-hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="hero-ct">
+						<h1>
+							<%- information.name %> profile
+						</h1>
+						<ul class="breadcumb">
+							<li class="active"><a href="/">Home</a></li>
+							<li> <span class="ion-ios-arrow-right"></span>Rated movies</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page-single">
+		<div class="container">
+			<div class="row ipad-width2">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="user-information">
+						<div class="user-img">
+							<a href="#"><img src="<%- information.avatar %> " alt=""><br></a>
+							<a href="#" class="redbtn">Change avatar</a>
+						</div>
+						<div class="user-fav">
+							<p>Account Details</p>
+							<ul>
+								<li><a href="profile">Profile</a></li>
+								<li class="active"><a href="userrate">Rated movies</a></li>
+							</ul>
+						</div>
+						<div class="user-fav">
+							<p>Others</p>
+							<ul>
+								<li><a href="profile">Change password</a></li>
+								<li><a href="/user/profile/logout">Log out</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="movie-tabs">
+					<div class="tabs">
+						<ul class="tab-links tabs-mv">
+							<li class="active"><a href="#comment">Comments</a></li>
+							<li><a href="#rating"> Rets </a></li>
+						</ul>
+						<div class="tab-content">
+							<div id="comment" class="tab active">
+								<div class="row">
+									<div class="col-md-9 col-sm-12 col-xs-12">
+										<div class="topbar-filter">
+											<p>Found <span><%-comment_count %> comments </span> in total</p>
+										</div>
+										<% commentsmovies.forEach(comment=> { %>
+											<div class="movie-item-style-2 userrate">
+												<img src="<%- comment.cover %> " alt="Movie cover">
+												<div class="mv-item-infor">
+													<h6><a href="#"> <%- comment.name %>  <span><%- comment.year %> </span></a></h6>
+													<p class="time sm-text">comment :</p>
+													<!-- <p class="rate"><i class="ion-android-star"></i><span>9.0</span> /10
+													</p> -->
+													<!-- <p class="time sm-text">your reviews:</p> -->
+													<!-- <h6>Best Marvel movie in my opinion</h6> -->
+													<p class="time sm"><%- new Date(comment.date).toLocaleDateString("en-US") %> </p>
+													<p>“<%- comment.text %> ”</p>
+												</div>
+											</div>
+											<% }) %>
+									</div>
+								</div>
+								<div id="cast" class="tab">
+								</div>
+							</div>
+
+							<div id="rating" class="tab">
+								<div class="row">
+									<div class="col-md-9 col-sm-12 col-xs-12">
+										<div class="topbar-filter">
+											<p>Found <span><%- rate_count %>  rates</span> in total</p>
+										</div>
+										<% ratesmovies.forEach(rate=> { %>
+											<div class="movie-item-style-2 userrate">
+												<img src="<%-rate.cover %> " alt="Movie cover">
+												<div class="mv-item-infor">
+													<h6><a href="#"> <%- rate.name %>  <span><%- rate.year %> </span></a></h6>
+													<p class="time sm-text">rate :</p>
+													 <p class="rate"><i class="ion-android-star"></i><span><%- rate.Rating %> </span> /10
+													</p> 
+												</div>
+											</div>
+											<% }) %>	
+									</div>
+								</div>
+								<div id="cast" class="tab">
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="topbar-filter">
+						<div class="pagination2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- footer section-->
+	<%- include("_footer.ejs") %>

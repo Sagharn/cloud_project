@@ -1,0 +1,108 @@
+<%- include("_header.ejs") %> 
+
+
+<div class="hero user-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1><%- information.name %>  profile</h1>
+					<ul class="breadcumb">
+						<li class="active"><a href="/">Home</a></li>
+						<li> <span class="ion-ios-arrow-right"></span>Profile</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="page-single">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-3 col-sm-12 col-xs-12">
+				<div class="user-information">
+					<div class="user-img">
+						<a href="#"><img src="<%- information.avatar %> " alt="Avatar"><br></a>
+					</div>
+					<div class="user-fav">
+						<p>Account Details</p>
+						<ul>
+							<li  class="active"><a href="profile">Profile</a></li>
+							<!-- <li><a href="userfavoritelist.html">Favorite movies</a></li> -->
+							<li><a href="userrate">Rated movies</a></li>
+						</ul>
+					</div>
+					<div class="user-fav">
+						<p>Others</p>
+						<ul>
+							<li><a href="#">Change password</a></li>
+							<li><a href="/user/profile/logout">Log out</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				<div class="form-style-1 user-pro" action="#">
+					<form action="/user/profile" class="user" method="post">
+						<h4>01. Profile details</h4>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Username</label>
+								<input type="text" value="<%- information.username %> " name="username" disabled>
+							</div>
+							<div class="col-md-6 form-it">
+								<label>Email Address</label>
+								<input type="text" value="<%- information.email %> " name="email" disabled>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Name</label>
+								<input type="text" placeholder=" <%- information.name %> " name="name">
+							</div>
+							<div class="col-md-6 form-it">
+								<label>Avatar</label>
+								<input type="text" placeholder="Avatar Link" name="avatar">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-2">
+								<input class="submit" type="submit" value="submit">
+							</div>
+						</div>	
+					</form>
+					<form action="/user/profile/changepass" class="password" method="post">
+						<h4>02. Change password</h4>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Old Password</label>
+								<input type="text" placeholder="**********" name="oldpassword">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>New Password</label>
+								<input type="text" placeholder="***************" name="newpassword">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-it">
+								<label>Confirm New Password</label>
+								<input type="text" placeholder="*************** " name="cnewpassword">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<input class="submit" type="submit" value="change">
+							</div>
+						</div>	
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- footer section-->
+<%- include("_footer.ejs") %>

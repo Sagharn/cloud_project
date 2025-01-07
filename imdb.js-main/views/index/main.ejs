@@ -1,0 +1,224 @@
+<%- include("_header.ejs") %> 
+<div class="slider movie-items">
+	<div class="container">
+		<div class="row">
+			<div class="social-link">
+				<p>Follow us: </p>
+				<a href="#"><i class="ion-social-facebook"></i></a>
+				<a href="#"><i class="ion-social-twitter"></i></a>
+				<a href="#"><i class="ion-social-googleplus"></i></a>
+				<a href="#"><i class="ion-social-youtube"></i></a>
+			</div>
+	    	<div  class="slick-multiItemSlider">
+				<% movie_slide.forEach(movie => { %>
+					<div class="movie-item">
+						<div class="mv-img">
+							<a href="#"><img src="<%- movie.cover %> " alt="" width="285" height="437"></a>
+						</div>
+						<div class="title-in">
+							<div class="cate">
+								<span class="blue"><a href="#"><%- movie.genre %></a></span>
+							</div>
+							<h6><a href="<%- '/video/' + movie.ID %> "><%- movie.name %></a></h6>
+							<p><i class="ion-android-star"></i><span><%- movie.average %></span> /10</p>
+						</div>
+					</div>
+				<% }) %>
+
+	    	</div>
+	    </div>
+	</div>
+</div>
+<div class="movie-items">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-8">
+				<!-- ----------------------------IN cinema------------------------------------- -->
+				<div class="title-hd">
+					<h2>in cinema</h2>
+					<a href="/video/" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				</div>
+				<div class="tabs">
+					<ul class="tab-links">
+						<li class="active"><a href="#tab2">#New</a></li>
+						<li><a href="#tab3">  #Top rated  </a></li>
+						<li><a href="#tab4"> #Most reviewed</a></li>                        
+					</ul>
+				    <div class="tab-content">
+				        <div id="tab2" class="tab active">
+				           <div class="row">
+				            	<div class="slick-multiItem">
+
+									<% new_movies.forEach(movie => { %>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="<%- movie.cover %> " alt="" width="185" height="284">
+												</div>
+												<div class="hvr-inner">
+													<a  href="<%- '/video/'+  movie.ID %> >"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+												</div>
+												<div class="title-in">
+													<h6><a href="<%- '/video/' + movie.ID %>"><%- movie.name %> </a></h6>
+													<p><i class="ion-android-star"></i><span> <%- movie.average %> </span> /10</p>
+												</div>
+											</div>
+										</div>
+									<% }) %>
+				            	</div>
+				            </div>
+				        </div>
+
+				        <div id="tab3" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+									<% top_movies.forEach(movie => { %>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="<%- movie.cover %> " alt="" width="185" height="284">
+												</div>
+												<div class="hvr-inner">
+													<a  href="<%- '/video/' + movie.ID %> "> Read more <i class="ion-android-arrow-dropright"></i> </a>
+												</div>
+												<div class="title-in">
+													<h6><a href="<%- '/video/' + movie.ID %>"><%- movie.name %> </a></h6>
+													<p><i class="ion-android-star"></i><span><%- movie.average %></span> /10</p>
+												</div>
+											</div>
+										</div>
+									<% }) %>
+				            	</div>
+				            </div>
+			       	 	</div>
+
+			       	 	<div id="tab4" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+									<% most_reviews_movies.forEach(movie => { %>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="<%- movie.cover %> " alt="" width="185" height="284">
+												</div>
+												<div class="hvr-inner">
+													<a  href="<%- '/video/' + movie.ID %> "> Read more <i class="ion-android-arrow-dropright"></i> </a>
+												</div>
+												<div class="title-in">
+													<h6><a href="<%- '/video/' + movie.ID %>"><%- movie.name %> </a></h6>
+													<p><i class="ion-android-star"></i><span><%- movie.average %> </span> /10</p>
+												</div>
+											</div>
+										</div>
+									<% }) %>
+				            	</div>
+				            </div>
+			       	 	</div>
+
+				    </div>
+				</div>
+				<!-- ----------------------------on tv------------------------------------- -->
+				<div class="title-hd">
+					<h2>on tv</h2>
+					<a href="/video/" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				</div>
+				<div class="tabs">
+					<ul class="tab-links-2">
+						<!-- <li><a href="#tab21">#Popular</a></li> -->
+						<li class="active"><a href="#tab22"> #New</a></li>
+						<li><a href="#tab23">  #Top rated  </a></li>
+						<li><a href="#tab24"> #Most reviewed</a></li>                        
+					</ul>
+				    <div class="tab-content">
+				        <div id="tab22" class="tab active">
+				           <div class="row">
+				            	<div class="slick-multiItem">
+									<% new_series.forEach(series => { %>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="<%- series.cover %> " alt="" width="185" height="284">
+												</div>
+												<div class="hvr-inner">
+													<a  href="<%- '/video/' + series.ID %> "> Read more <i class="ion-android-arrow-dropright"></i> </a>
+												</div>
+												<div class="title-in">
+													<h6><a href="<%- '/video/' + series.ID %>"><%- series.name %> </a></h6>
+													<p><i class="ion-android-star"></i><span><%- series.average %> </span> /10</p>
+												</div>
+											</div>
+										</div>
+									<% }) %>
+				            	</div>
+				            </div>
+				        </div>
+
+				        <div id="tab23" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+									<% top_series.forEach(series => { %>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="<%- series.cover %> " alt="" width="185" height="284">
+												</div>
+												<div class="hvr-inner">
+													<a  href="<%- '/video/' + series.ID %> "> Read more <i class="ion-android-arrow-dropright"></i> </a>
+												</div>
+												<div class="title-in">
+													<h6><a href="<%- '/video/' + series.ID %>"><%- series.name %> </a></h6>
+													<p><i class="ion-android-star"></i><span><%- series.average %> </span> /10</p>
+												</div>
+											</div>
+										</div>
+									<% }) %>
+				            	</div>
+				            </div>
+			       	 	</div>
+
+			       	 	 <div id="tab24" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+									<% most_reviews_series.forEach(series => { %>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="<%- series.cover %> " alt="" width="185" height="284">
+												</div>
+												<div class="hvr-inner">
+													<a  href="<%- '/video/' + series.ID %> "> Read more <i class="ion-android-arrow-dropright"></i> </a>
+												</div>
+												<div class="title-in">
+													<h6><a href="<%- '/video/' + series.ID %>"><%- series.name %> </a></h6>
+													<p><i class="ion-android-star"></i><span><%- series.average %> </span> /10</p>
+												</div>
+											</div>
+										</div>
+									<% }) %>	
+				            	</div>
+				            </div>
+			       	 	</div>
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+					<div class="celebrities">
+						<h4 class="sb-title">Spotlight Celebrities</h4>
+						<% spotlight_artists.forEach(artist => { %>
+							<div class="celeb-item">
+								<a href="<%- '/artist/' + artist.ID %> "><img src="<%- artist.avatar %> " alt="" width="70" height="70"></a>
+								<div class="celeb-author">
+									<h6><a href="<%- '/artist/' + artist.ID %>"><%- artist.name %> </a></h6>
+									<span><%- artist.role %> </span>
+								</div>
+							</div>
+						<% }) %>
+						<a href="/artist/" class="btn">See all celebrities<i class="ion-ios-arrow-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%- include("_footer.ejs") %> 

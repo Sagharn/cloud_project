@@ -1,0 +1,287 @@
+<% const user = locals.user || {} ;%> 
+<%- include("_header.ejs") %>
+<div class="hero hero3">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- <h1> movie listing - list</h1>
+				<ul class="breadcumb">
+					<li class="active"><a href="#">Home</a></li>
+					<li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single movie-single movie_single">
+	<div class="container">
+		<div class="row ipad-width2">
+			<div class="col-md-4 col-sm-12 col-xs-12">
+				<div class="movie-img sticky-sb">
+					<img src="<%- video.cover%>" alt="">
+				</div>
+			</div>
+			<div class="col-md-8 col-sm-12 col-xs-12">
+				<div class="movie-single-ct main-content">
+					<h1 class="bd-hd"><%- video.name %>  <span> <%- video.year %> </span></h1>
+					<div class="social-btn">
+						<a href="#" class="parent-btn"><i class="ion-heart"></i> Add to Favorite</a>
+						<div class="hover-bnt">
+							<a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>share</a>
+							<div class="hvr-item">
+								<a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
+								<a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
+								<a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
+								<a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
+							</div>
+						</div>		
+					</div>
+					<div class="movie-rate">
+						<div class="rate">
+							<i class="ion-android-star"></i>
+							<p><span><%- video.average %> </span> /10<br>
+								<span class="rv"> <%- count %>  reviews in total </span>
+							</p>
+						</div>
+						<div class="rate-star">
+							<% if (user.id){ %> 
+								<p>Rate This Movie:  </p>
+								<div class="video-rating"></div>
+							 <% }else { %> 
+								<p>For rating you need to Login!</p>
+							<% } %> 
+						</div>
+					</div>
+					<div class="movie-tabs">
+						<div class="tabs">
+							<ul class="tab-links tabs-mv">
+								<li class="active"><a href="#overview">Overview</a></li>
+								<li><a href="#cast"> Cast & Crew </a></li>
+								<li><a href="#reviews">Reviews</a></li>
+								<li><a href="#rrewards"> Awards </a></li>                       
+								<li><a href="#moviesrelated"> Related Movies</a></li> 
+							</ul>
+						    <div class="tab-content">
+								<div id="overview" class="tab active">
+						            <div class="row">
+						            	<div class="col-md-8 col-sm-12 col-xs-12">
+											<div class="title-hd-sm">
+												<h4>about</h4>
+												<p><%- video.description %> </p>
+											</div>
+						            	</div>
+						            	<div class="col-md-4 col-xs-12 col-sm-12">
+						            		<div class="sb-it">
+						            			<h6>Genre:</h6>
+						            			<p><%-video.genre%></p>
+						            		</div>
+						            		<div class="sb-it">
+						            			<h6>Release Date:</h6>
+						            			<p><%- video.year%></p>
+						            		</div>
+		
+						            		<div class="sb-it">
+						            			<h6>MMPA Rating:</h6>
+						            			<p><%- video.content_rating%></p>
+						            		</div>
+						            		
+						            	</div>
+						            </div>
+						        </div>
+						        <div id="reviews" class="tab review">
+						           <div class="row">
+						            	<div class="rv-hd">
+						            		<div class="div">
+							            		<h3>Reviews for</h3>
+						       	 				<h2><%- video.name %> </h2>
+							            	</div>
+											<a href="#" class="redbtn">Write Review</a>
+						            	</div>
+										<% if (user.name && !user.banned) {%> 
+											<div class="form-style-1 user-pro">
+												<form action='<%- "/video/" + video.ID + "/comment" %>' method="POST">
+													<h4>Send Review</h4>
+													<div class="row">
+														<div class="col-md-12 form-it">
+															<label>your review</label>
+															<input type="text" placeholder="write your review here" name="comment">
+															<p>you logged in as <a href="#"><%- user.name %> </a></p>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-2">
+															<input class="submit" type="submit" value="Send">
+														</div>
+													</div>	
+												</form>
+											</div>
+											<% }else { %>
+												<div class="form-style-1 user-pro">
+														<h4>Send Review</h4>
+														<div class="row">
+															<div class="col-md-12 form-it">
+																<p>you need to Log in for sending comment</p>
+															</div>
+														</div>
+												</div>
+											<% } %> 
+						            	<div class="topbar-filter">
+											<p>Found <span><%- count %> </span> in total</p>
+										</div>
+                                        <% reviews.forEach(review => { %> 
+										<div class="mv-user-review-item">
+											<div class="user-infor">
+												<img src="<%- review.avatar %> " alt="">
+												<div>
+													<div class="no-star">  
+														<% for( let index = 0; index < review.Rating ; index++ ) { %>
+                                                            <i class="ion-android-star"></i> 
+                                                        <% } %>
+
+                                                        <% for( let index = 0; index < 10 -  review.Rating ; index++ ) { %>
+                                                             <i class="ion-android-star last"></i>  
+                                                         <% } %>
+                                                         
+													</div>
+													<p class="time">
+														<% const reviewDate = new Date(review.date) %> 
+														<%- reviewDate.toLocaleDateString("en-US") %> <a href="#"><%- review.name %> </a>
+													</p>
+												</div>
+											</div>
+											<p><%- review.text %> </p>
+										</div>
+                                        <% }) %>
+						            </div>
+						        </div>
+						        <div id="cast" class="tab">
+								<!-- movie cast -->
+								<div>
+									<h3>Cast & Crew of</h3>
+										<h2><%- video.name %> </h2>
+									<!-- //== -->
+									<div class="title-hd-sm">
+										<h4>CAST</h4>
+									</div>
+									<% artists.forEach(artist => { %>
+										<% if (artist.role == "Actor" || artist.role == "Actress") { %>
+										<div class="mvcast-item">											
+											<div class="cast-it">
+												<div class="cast-left">
+													<a href="<%- "/artist/" + artist.id  %> "><%- artist.name %> </a>
+												</div>
+												<p><%- artist.description %></p>
+											</div>
+										</div>
+										<% } %>
+									<% }) %>
+									<div class="title-hd-sm">
+										<h4>Directors and Writers</h4>
+									</div>
+									<% artists.forEach(artist => { %>
+										<% if (artist.role == "Director" || artist.role == "Writer") { %>
+											<div class="mvcast-item">											
+												<div class="cast-it">
+													<div class="cast-left">
+														<a href="<%- "/artist/" + artist.id  %> "><%- artist.name %> </a>
+													</div>
+													<p><%- artist.description %></p>
+												</div>
+											</div>
+											<% } %>
+									<% }) %>
+									
+									<!-- //== -->
+									<div class="title-hd-sm">
+										<h4>Producer</h4> <!--    ------------------     -->
+									</div>
+									<% artists.forEach(artist => { %>
+										<% if (artist.role == "Producer") { %>
+											<div class="mvcast-item">											
+												<div class="cast-it">
+													<div class="cast-left">
+														<a href="<%- "/artist/" + artist.id  %> "><%- artist.name %> </a>
+													</div>
+													<p><%- artist.description %></p>
+												</div>
+											</div>
+											<% } %>
+									<% }) %>
+									<div class="title-hd-sm">
+										<h4>Singer</h4> 
+									</div>
+									<% artists.forEach(artist => { %>
+										<% if (artist.role == "Singer") { %>
+											<div class="mvcast-item">											
+												<div class="cast-it">
+													<div class="cast-left">
+														<a href="<%- "/artist/" + artist.id  %> "><%- artist.name %> </a>
+													</div>
+													<p><%- artist.description %></p>
+												</div>
+											</div>
+											<% } %>
+									<% }) %>
+								</div>
+								<!-- movie user review -->
+					       	 	</div>
+
+					       	 	<!--------------------moviesrelated------------------------->
+					       	 	<div id="moviesrelated" class="tab">
+					       	 		<div class="row">
+					       	 			<h3>Related Movies To</h3>
+					       	 			<h2><%- video.name %></h2>
+					       	 			<div class="topbar-filter">
+											<p>Found <span><%- countf %> </span> in total</p>
+										</div>
+										<% const relatedmovie = locals.relatedmovie || [] ;%> 
+										<% relatedmovie.forEach(movie => { %>
+											<div class="movie-item-style-2">
+												<img src="<%- movie.cover %> " alt="">
+												<div class="mv-item-infor">
+													<h6><a href="#"><%- movie.name %>  <span>(<%-movie.year%>)</span></a></h6>
+													<p class="rate"><i class="ion-android-star"></i><span><%- movie.average %> </span> /10</p>
+													<p class="describe"><%- movie.description %> </p>
+													<!--<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
+													<p>Director: <a href="#">Joss Whedon</a></p>
+													<p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p>-->
+												</div>
+											</div>
+										<% }) %>
+										
+										<div class="topbar-filter">
+										</div>
+					       	 		</div>
+								</div>
+                                    <!--------------------awards------------------------->
+									<div id="rrewards" class="tab">
+					       	 		<div class="row">
+					       	 			<h3>Awards</h3>
+					       	 			<h2><%- video.name %></h2>
+					       	 			<div class="topbar-filter">
+											<p>Found <span><%- countre %> </span> in total</p>
+										</div>
+										<% faward.forEach(award => { %>
+											<div class="movie-item-style-2">	
+												<div class="mv-item-infor">
+													<% const awardDate = new Date(award.Date) %> 
+													<h6><a href="#"><%- award.Name %> <span><%-awardDate.toLocaleDateString("en-US")%></span></a></h6>								
+													<p class="describe"><%- award.Description %> </p>
+												</div>
+											</div>
+										<% }) %>
+										<div class="topbar-filter">
+										</div>
+					       	 		</div>
+								</div>
+									<!--------------------awards------------------------->
+					       	 	</div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%- include("_footer.ejs") %>
